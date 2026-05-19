@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق عين جمل | رفيق الذاكرة والروح</title>
+    <style>
+        @import url('https://googleapis.com');
+
+        :root {
+            --bg-color: #000000; /* أسود كامل */
+            --milky-white: #f7f8f8; /* أبيض حليبي للنصوص الأساسية */
+            --milky-muted: #b4bcd0; /* أبيض حليبي باهت للنصوص الفرعية */
+            --border-color: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --glow-color: rgba(255, 255, 255, 0.05); /* وهج أبيض خفيف */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--milky-white);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* تأثير الدخول المتلاشي الفخم */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* الهيدر العلوي */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--milky-white);
+            border-radius: 50%; /* نقطة بدلاً من المربع */
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 80px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* التاج الصغير العلوي */
+        .badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--milky-muted);
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        /* العنوان الرئيسي الكبير */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, var(--milky-white) 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* الوصف السفلي */
+        .description {
+            font-size: 1.15rem;
+            color: var(--milky-muted);
+            max-width: 750px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* زر التحميل الفخم باللونين الأبيض والأسود */
+        .download-btn {
+            background: var(--milky-white);
+            color: var(--bg-color);
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1rem;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 70px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(255, 255, 255, 0.2);
+        }
+
+        /* إطار الصورة الفخم */
+        .image-wrapper {
+            width: 100%;
+            position: relative;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 6px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 80px var(--glow-color);
+            margin-bottom: 100px;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        /* أقسام المميزات الجديدة */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: right;
+            width: 100%;
+            border-right: 3px solid var(--milky-white);
+            padding-right: 15px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: calc(50% - 12px) calc(50% - 12px);
+            gap: 24px;
+            width: 100%;
+            margin-bottom: 80px;
+            text-align: right;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--milky-white);
+        }
+
+        /* القوائم المنقطة بديل الإيموجي */
+        .custom-list {
+            list-style: none;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-right: 20px;
+            margin-bottom: 12px;
+            color: var(--milky-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .custom-list li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: var(--milky-white);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        /* تذييل الصفحة الفخم - Footer */
+        footer {
+            width: 100%;
+            max-width: 1200px;
+            padding: 60px 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+            font-family: sans-serif; /* لظهور الخط الإنجليزي بشكل رسمي */
+        }
+
+        .dev-by {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--milky-white);
+            letter-spacing: 0.5px;
+        }
+
+        .team-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #666666; /* لون رصاصي سطوع هادئ */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* استجابة الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.1rem; }
+            .description { font-size: 1rem; }
+            .grid-container { grid-template-columns: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="fade-in-element">
+        <div class="logo">عين جمل</div>
+    </header>
+
+    <main class="container">
+        <!-- التاج العلوي -->
+        <div class="badge fade-in-element delay-1">ما هو تطبيق عين جمل؟</div>
+        
+        <!-- العنوان الرئيسي -->
+        <h1 class="fade-in-element delay-1">عين جمل | رفيق الذاكرة والروح</h1>
+        
+        <!-- الوصف الفخم -->
+        <p class="description fade-in-element delay-2">
+            عين جمل هو برنامج عربي مجاني وخفيف جداً، صُمم خصيصاً ليكون الرفيق اليومي لكبار السن، وأصحاب المواعيد، وطلاب العلم. يجمع التطبيق بين العناية بالذاكرة من خلال الألعاب الذهنية، والوقاية من أمراض الشيخوخة، وبين الغذاء الروحي عبر الأذكار الدينية، وتنظيم الوقت بتنبيهات المواعيد.
+        </p>
+        
+        <!-- زر التحميل المباشر -->
+        <a href="https://b.top4top.io/f_f8RySff4wWvrdyWtL9knqQ/1779369278/3791xgc301.rar" class="download-btn fade-in-element delay-2">تحميل</a>
+        
+        <!-- عرض الصورة مع تأثير الـ Glow الأبيض الخفيف -->
+        <div class="image-wrapper fade-in-element delay-3">
+            <img src="ain.png" alt="واجهة تطبيق عين جمل">
+        </div>
+
+        <!-- قسم لماذا تختار عين جمل وميزاته -->
+        <h2 class="section-title">لماذا تختار "عين جمل"؟</h2>
+        
+        <div class="grid-container">
+            <!-- الكرت الأول: ميزات تقنية -->
+            <div class="card">
+                <h3>ميزات تقنية فريدة</h3>
+                <ul class="custom-list">
+                    <li>بدون تثبيت: يعمل مباشرة فور التحميل دون الحاجة لخطوات تنصيب معقدة.</li>
+                    <li>حجم خفيف جداً: لا يستهلك موارد جهازك ولا يؤثر على أدائه.</li>
+                    <li>برمجة عربية 100%: مطور بأيادٍ عربية ليفهم احتياجات المستخدم العربي بدقة.</li>
+                    <li>مفتوح المصدر: البرنامج متاح للجميع بدون أي تشفير، دعماً للمجتمع البرمجي.</li>
+                    <li>ثنائي اللغة: يدعم اللغتين العربية والإنجليزية بالكامل.</li>
+                </ul>
+            </div>
+
+            <!-- الكرت الثاني: تصميم مريح -->
+            <div class="card">
+                <h3>تصميم مريح وسهل</h3>
+                <ul class="custom-list">
+                    <li>واجهة واضحة: تصميم منسق ومبسط يناسب جميع الأعمار دون تشتيت.</li>
+                    <li>خطوط كبيرة: خطوط واضحة جداً تسهل القراءة لكبار السن وضعاف النظر.</li>
+                    <li>ألوان مميزة: ألوان مريحة للعين وعالية التباين لسهولة التنقل.</li>
+                </ul>
+            </div>
+
+            <!-- الكرت الثالث: صحة وعناية -->
+            <div class="card">
+                <h3>صحة وعناية بالذاكرة</h3>
+                <ul class="custom-list">
+                    <li>وقاية من الزهايمر: تمارين مخصصة لحماية كبار السن من أمراض تقدم العمر.</li>
+                    <li>دعم مرضى الزهايمر: أدوات يومية تساعد على تنشيط الخلايا الرمادية وتقوية الذاكرة.</li>
+                    <li>ألعاب ذكية: ألعاب ذهنية ممتعة ومفيدة لتقوية الذاكرة تناسب الصغار والكبار.</li>
+                </ul>
+            </div>
+
+            <!-- الكرت الرابع: روحانيات وتنظيم -->
+            <div class="card">
+                <h3>روحانيات وتنظيم وقت</h3>
+                <ul class="custom-list">
+                    <li>حصن المسلم: قسم خاص بالأذكار الدينية اليومية للحفاظ على الأوراد.</li>
+                    <li>منظم المواعيد: تنبيهات ذكية للمواعيد والتواقيت المهمة لضمان عدم النسيان.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- تذييل الصفحة الفخم المكتوب في نهاية الموقع تماماً -->
+    <footer>
+        <div class="dev-by">Dev by Yasser Al Qahtani</div>
+        <div class="team-name">QEMA TEAM</div>
+    </footer>
+
+</body>
+</html>

@@ -51,7 +51,6 @@
             }
         }
 
-        /* الهيدر العلوي */
         header {
             width: 100%;
             max-width: 1200px;
@@ -75,10 +74,9 @@
             width: 10px;
             height: 10px;
             background: var(--milky-white);
-            border-radius: 50%; /* نقطة بدلاً من المربع */
+            border-radius: 50%; 
         }
 
-        /* الحاوية الرئيسية */
         .container {
             max-width: 1000px;
             width: 100%;
@@ -89,7 +87,6 @@
             align-items: center;
         }
 
-        /* التاج الصغير العلوي */
         .badge {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
@@ -101,7 +98,6 @@
             display: inline-block;
         }
 
-        /* العنوان الرئيسي الكبير */
         h1 {
             font-size: 3.2rem;
             font-weight: 800;
@@ -112,7 +108,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* الوصف السفلي */
         .description {
             font-size: 1.15rem;
             color: var(--milky-muted);
@@ -122,7 +117,6 @@
             font-weight: 300;
         }
 
-        /* زر التحميل الفخم باللونين الأبيض والأسود */
         .download-btn {
             background: var(--milky-white);
             color: var(--bg-color);
@@ -141,7 +135,6 @@
             box-shadow: 0 6px 24px rgba(255, 255, 255, 0.2);
         }
 
-        /* إطار الصورة الفخم */
         .image-wrapper {
             width: 100%;
             position: relative;
@@ -160,7 +153,6 @@
             border: 1px solid rgba(255, 255, 255, 0.02);
         }
 
-        /* أقسام المميزات الجديدة */
         .section-title {
             font-size: 2rem;
             font-weight: 700;
@@ -200,7 +192,6 @@
             color: var(--milky-white);
         }
 
-        /* القوائم المنقطة بديل الإيموجي */
         .custom-list {
             list-style: none;
         }
@@ -226,7 +217,6 @@
             opacity: 0.5;
         }
 
-        /* تذييل الصفحة الفخم - Footer */
         footer {
             width: 100%;
             max-width: 1200px;
@@ -237,7 +227,7 @@
             flex-direction: column;
             gap: 6px;
             align-items: center;
-            font-family: sans-serif; /* لظهور الخط الإنجليزي بشكل رسمي */
+            font-family: sans-serif; 
         }
 
         .dev-by {
@@ -250,12 +240,11 @@
         .team-name {
             font-size: 0.75rem;
             font-weight: 600;
-            color: #666666; /* لون رصاصي سطوع هادئ */
+            color: #666666; 
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        /* استجابة الشاشات الصغيرة */
         @media (max-width: 768px) {
             h1 { font-size: 2.1rem; }
             .description { font-size: 1rem; }
@@ -270,30 +259,23 @@
     </header>
 
     <main class="container">
-        <!-- التاج العلوي -->
         <div class="badge fade-in-element delay-1">ما هو تطبيق عين جمل؟</div>
         
-        <!-- العنوان الرئيسي -->
         <h1 class="fade-in-element delay-1">عين جمل | رفيق الذاكرة والروح</h1>
         
-        <!-- الوصف الفخم -->
         <p class="description fade-in-element delay-2">
             عين جمل هو برنامج عربي مجاني وخفيف جداً، صُمم خصيصاً ليكون الرفيق اليومي لكبار السن، وأصحاب المواعيد، وطلاب العلم. يجمع التطبيق بين العناية بالذاكرة من خلال الألعاب الذهنية، والوقاية من أمراض الشيخوخة، وبين الغذاء الروحي عبر الأذكار الدينية، وتنظيم الوقت بتنبيهات المواعيد.
         </p>
         
-        <!-- زر التحميل المباشر -->
         <a href="https://b.top4top.io/f_f8RySff4wWvrdyWtL9knqQ/1779369278/3791xgc301.rar" class="download-btn fade-in-element delay-2">تحميل</a>
         
-        <!-- عرض الصورة مع تأثير الـ Glow الأبيض الخفيف -->
         <div class="image-wrapper fade-in-element delay-3">
             <img src="ain.png" alt="واجهة تطبيق عين جمل">
         </div>
 
-        <!-- قسم لماذا تختار عين جمل وميزاته -->
         <h2 class="section-title">لماذا تختار "عين جمل"؟</h2>
         
         <div class="grid-container">
-            <!-- الكرت الأول: ميزات تقنية -->
             <div class="card">
                 <h3>ميزات تقنية فريدة</h3>
                 <ul class="custom-list">
@@ -305,7 +287,6 @@
                 </ul>
             </div>
 
-            <!-- الكرت الثاني: تصميم مريح -->
             <div class="card">
                 <h3>تصميم مريح وسهل</h3>
                 <ul class="custom-list">
@@ -315,7 +296,6 @@
                 </ul>
             </div>
 
-            <!-- الكرت الثالث: صحة وعناية -->
             <div class="card">
                 <h3>صحة وعناية بالذاكرة</h3>
                 <ul class="custom-list">
@@ -325,7 +305,6 @@
                 </ul>
             </div>
 
-            <!-- الكرت الرابع: روحانيات وتنظيم -->
             <div class="card">
                 <h3>روحانيات وتنظيم وقت</h3>
                 <ul class="custom-list">
@@ -336,7 +315,6 @@
         </div>
     </main>
 
-    <!-- تذييل الصفحة الفخم المكتوب في نهاية الموقع تماماً -->
     <footer>
         <div class="dev-by">Dev by Yasser Al Qahtani</div>
         <div class="team-name">QEMA TEAM</div>
